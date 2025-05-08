@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
   <key>CFBundleName</key>
-  <string>ShawkyInstaller</string>
+  <string>IntalioInstaller</string>
   <key>CFBundleDisplayName</key>
-  <string>Shawky CLI Installer</string>
+  <string>Intalio CLI Installer</string>
   <key>CFBundleIdentifier</key>
   <string>com.intalio.cli.installer</string>
   <key>CFBundleVersion</key>
