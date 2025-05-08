@@ -1,0 +1,42 @@
+#!/bin/bash
+
+cd "$(dirname "$0")"
+
+CLI_NAME="intalio"
+INSTALL_PATH="/usr/local/bin/.intalioCLI"
+BIN_PATH="/usr/local/bin/$CLI_NAME"
+DOWNLOAD_URL="https://github.com/AhmedShawkyAhmed/shawky_cli/releases/latest/download/shawkyCLI.zip"
+ZIP_PASSWORD="6db276063e7b9881b63f9876fe787dd36e835249bd26b361e1cf50d4bbdc5fc1"
+
+clear
+echo "🔧 Installing $CLI_NAME CLI..."
+
+sudo rm -rf "$INSTALL_PATH"
+sudo rm -f "$BIN_PATH"
+
+sudo mkdir -p "$INSTALL_PATH"
+
+echo "Downloading intalioCLI..."
+curl -L "$DOWNLOAD_URL" -o "intalioCLI.zip"
+
+if [ ! -f "intalioCLI.zip" ]; then
+    echo "❌ Download failed! Please check the URL."
+    exit 1
+fi
+
+echo "Unzipping the downloaded file..."
+sudo unzip -P "$ZIP_PASSWORD" -q "intalioCLI.zip" -d "$INSTALL_PATH"
+
+rm "intalioCLI.zip"
+
+echo "Creating symlink for the CLI script..."
+sudo ln -s "$INSTALL_PATH/$CLI_NAME" "$BIN_PATH"
+sudo chmod +x "$BIN_PATH"
+
+# echo "Hiding the $INSTALL_PATH folder from Finder..."
+sudo chflags hidden "$INSTALL_PATH"
+
+echo "✅ Installed! You can now run the CLI by typing: $CLI_NAME"
+sleep 1
+
+osascript -e 'tell application "Terminal" to close front window' & exit 0
